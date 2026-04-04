@@ -13,6 +13,8 @@ USER root
 RUN apt-get update && apt-get install -y \
     libxrender1 \
     libxext6 \
+    libexpat1 \
+    libcairo2 \
     && rm -rf /var/lib/apt/lists/*
 USER user
 
