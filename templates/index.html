@@ -1033,6 +1033,91 @@
             h1, h2, h3 {
                 font-size: 1.3rem !important;
             }
+
+            /* Mobile table optimization */
+            .predictions-card {
+                padding: 1.2rem;
+            }
+
+            .table-responsive {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                max-width: 100vw;
+                margin: 0 -1.2rem;
+                padding: 0 1.2rem;
+            }
+
+            .table {
+                table-layout: auto;
+                font-size: 0.85rem;
+                min-width: 600px;
+            }
+
+            .table thead {
+                position: sticky;
+                top: 0;
+                z-index: 10;
+            }
+
+            .table th {
+                padding: 0.75rem 0.8rem;
+                font-size: 0.75rem;
+                letter-spacing: 0.8px;
+                white-space: nowrap;
+                background: rgba(15, 23, 42, 0.8);
+            }
+
+            .table td {
+                padding: 0.75rem 0.8rem;
+                font-size: 0.85rem;
+            }
+
+            .col-endpoint {
+                min-width: 100px;
+                width: auto;
+                text-align: left;
+            }
+
+            .col-probability {
+                min-width: 140px;
+                width: auto;
+                text-align: center;
+            }
+
+            .col-prediction {
+                min-width: 120px;
+                width: auto;
+                text-align: center;
+            }
+
+            .endpoint-name {
+                font-size: 0.9rem;
+            }
+
+            .progress {
+                height: 2.2rem;
+                font-size: 0.75rem;
+            }
+
+            .progress-bar {
+                font-size: 0.75rem;
+                min-width: 35px;
+            }
+
+            .toxic-badge, .safe-badge {
+                padding: 0.6rem 1rem;
+                font-size: 0.8rem;
+                min-width: 95px;
+                border: 1.5px solid;
+            }
+
+            .molecule-card {
+                margin-bottom: 1.5rem;
+            }
+
+            .molecule-image {
+                min-height: 250px;
+            }
         }
 
         /* Tablet optimization (576px - 992px) */
@@ -1051,6 +1136,158 @@
             }
             .section-title {
                 font-size: 1.6rem;
+            }
+
+            /* Tablet table optimization */
+            .table {
+                font-size: 0.9rem;
+                table-layout: auto;
+                min-width: 100%;
+            }
+
+            .table th {
+                padding: 0.85rem 0.9rem;
+                font-size: 0.8rem;
+            }
+
+            .table td {
+                padding: 0.85rem 0.9rem;
+            }
+
+            .col-endpoint {
+                min-width: 110px;
+            }
+
+            .col-probability {
+                min-width: 150px;
+            }
+
+            .col-prediction {
+                min-width: 130px;
+            }
+
+            .progress {
+                height: 2.5rem;
+            }
+
+            .toxic-badge, .safe-badge {
+                padding: 0.7rem 1.2rem;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Extra small mobile devices (< 360px) */
+        @media (max-width: 360px) {
+            .main-container {
+                padding: 1rem 0.75rem;
+            }
+
+            .input-card {
+                padding: 1rem;
+                margin: 0 0.25rem;
+            }
+
+            .predictions-card {
+                padding: 1rem;
+                margin: 0 0.25rem;
+            }
+
+            .table-responsive {
+                margin: 0 -1rem;
+                padding: 0 1rem;
+            }
+
+            .table {
+                font-size: 0.75rem;
+                min-width: 550px;
+            }
+
+            .table th {
+                padding: 0.6rem 0.6rem;
+                font-size: 0.7rem;
+                letter-spacing: 0.6px;
+            }
+
+            .table td {
+                padding: 0.6rem 0.6rem;
+                font-size: 0.75rem;
+            }
+
+            .col-endpoint {
+                min-width: 85px;
+            }
+
+            .col-probability {
+                min-width: 130px;
+            }
+
+            .col-prediction {
+                min-width: 110px;
+            }
+
+            .endpoint-name {
+                font-size: 0.85rem;
+            }
+
+            .progress {
+                height: 2rem;
+                font-size: 0.65rem;
+            }
+
+            .progress-bar {
+                font-size: 0.65rem;
+                min-width: 30px;
+            }
+
+            .toxic-badge, .safe-badge {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.7rem;
+                min-width: 85px;
+                border: 1px solid;
+            }
+
+            .molecule-card {
+                padding: 1rem;
+            }
+
+            .molecule-image {
+                min-height: 200px;
+            }
+
+            .results-title {
+                font-size: 1.5rem;
+            }
+
+            section-title {
+                font-size: 1.1rem;
+            }
+
+            h1, h2, h3 {
+                font-size: 1.1rem !important;
+            }
+
+            .navbar-brand .text {
+                font-size: 0.95rem;
+            }
+
+            .navbar-brand small {
+                font-size: 0.5rem;
+            }
+
+            .form-label {
+                font-size: 0.85rem;
+            }
+
+            .form-control, .form-select {
+                font-size: 0.9rem;
+                padding: 0.7rem 1rem;
+            }
+
+            #themeToggle {
+                width: 32px;
+                height: 32px;
+                font-size: 0.8rem;
+                margin-left: 0.3rem;
             }
         }
 
