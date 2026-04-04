@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | ToxVision ML Predictor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --success: #10b981;
+            --danger: #ef4444;
+            --dark-bg: #0f172a;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+        }
+
+        html, body {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #1a1f3a 100%);
+            color: var(--text-primary);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+        }
+
+        .chem-bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 14% 22%, rgba(99, 102, 241, 0.24), transparent 42%),
+                radial-gradient(circle at 82% 18%, rgba(16, 185, 129, 0.14), transparent 36%),
+                radial-gradient(circle at 50% 82%, rgba(56, 189, 248, 0.12), transparent 40%);
+        }
+
+        #chemCanvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+            opacity: 0.9;
+        }
+
+        .navbar {
+            position: relative;
+            z-index: 2;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            padding: 1.2rem 2rem;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .navbar-brand .icon {
+            font-size: 2rem;
+            background: linear-gradient(135deg, var(--primary-light), #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .navbar-brand .text {
+            background: linear-gradient(135deg, var(--primary-light), var(--text-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .navbar-brand small {
+            display: block;
+            font-size: 0.65rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            margin-top: 0.2rem;
+        }
+
+        .navbar-models {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        .navbar-links {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .nav-link-pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.42rem 0.9rem;
+            border-radius: 999px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            border: 1px solid rgba(148, 163, 184, 0.25);
+            background: rgba(15, 23, 42, 0.45);
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            transition: all 0.25s ease;
+        }
+
+        .nav-link-pill:hover {
+            color: #ffffff;
+            border-color: rgba(129, 140, 248, 0.55);
+            background: rgba(99, 102, 241, 0.25);
+        }
+
+        .nav-link-pill.active {
+            color: #ffffff;
+            border-color: rgba(129, 140, 248, 0.7);
+            background: rgba(99, 102, 241, 0.35);
+        }
+
+        .navbar-models .badge {
+            background: rgba(99, 102, 241, 0.2);
+            color: var(--primary-light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+        }
+
+        .main-container {
+            position: relative;
+            z-index: 2;
+            padding: 3rem 2rem;
+            min-height: calc(100vh - 80px);
+        }
+
+        .hero-card,
+        .info-card {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(148, 163, 184, 0.15);
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-card {
+            padding: 2.2rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .hero-title {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 0.6rem;
+            background: linear-gradient(135deg, #a5b4fc, #f1f5f9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-sub {
+            color: var(--text-secondary);
+            font-size: 1.02rem;
+        }
+
+        .info-card {
+            padding: 1.6rem;
+            height: 100%;
+        }
+
+        .section-title {
+            font-size: 1.05rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #ffffff;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .section-title i {
+            color: var(--primary-light);
+            margin-right: 0.45rem;
+        }
+
+        .info-text {
+            color: var(--text-secondary);
+            line-height: 1.65;
+            margin-bottom: 0.6rem;
+        }
+
+        .metric-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            margin: 0.28rem 0.45rem 0.28rem 0;
+            padding: 0.4rem 0.8rem;
+            border-radius: 999px;
+            border: 1px solid rgba(129, 140, 248, 0.5);
+            background: rgba(99, 102, 241, 0.18);
+            color: #dbeafe;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        .data-table-wrap {
+            overflow-x: auto;
+            border-radius: 14px;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+        }
+
+        .data-table {
+            width: 100%;
+            margin: 0;
+            border-collapse: collapse;
+            min-width: 690px;
+            background: rgba(15, 23, 42, 0.35);
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 0.85rem 0.9rem;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+            text-align: left;
+        }
+
+        .data-table th {
+            color: #e2e8f0;
+            font-size: 0.84rem;
+            letter-spacing: 0.7px;
+            text-transform: uppercase;
+        }
+
+        .data-table td {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+
+        .badge-good {
+            display: inline-block;
+            border: 1px solid rgba(16, 185, 129, 0.5);
+            color: #a7f3d0;
+            background: rgba(16, 185, 129, 0.16);
+            border-radius: 8px;
+            padding: 0.2rem 0.55rem;
+            font-weight: 700;
+            font-size: 0.82rem;
+        }
+
+        .badge-mid {
+            display: inline-block;
+            border: 1px solid rgba(99, 102, 241, 0.5);
+            color: #c7d2fe;
+            background: rgba(99, 102, 241, 0.16);
+            border-radius: 8px;
+            padding: 0.2rem 0.55rem;
+            font-weight: 700;
+            font-size: 0.82rem;
+        }
+
+        .badge-warn {
+            display: inline-block;
+            border: 1px solid rgba(245, 158, 11, 0.5);
+            color: #fde68a;
+            background: rgba(245, 158, 11, 0.16);
+            border-radius: 8px;
+            padding: 0.2rem 0.55rem;
+            font-weight: 700;
+            font-size: 0.82rem;
+        }
+
+        .footer-note {
+            margin-top: 1.4rem;
+            color: var(--text-muted);
+            font-size: 0.88rem;
+        }
+
+        .stack-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 0.85rem;
+        }
+
+        .stack-item {
+            border: 1px solid rgba(148, 163, 184, 0.25);
+            background: rgba(15, 23, 42, 0.45);
+            border-radius: 12px;
+            padding: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            color: #e2e8f0;
+            font-weight: 600;
+            font-size: 0.92rem;
+        }
+
+        .stack-item i {
+            color: #a5b4fc;
+            width: 20px;
+            text-align: center;
+            font-size: 1.02rem;
+        }
+
+        .use-case-list {
+            margin: 0;
+            padding-left: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+        }
+
+        .use-case-list li {
+            margin-bottom: 0.45rem;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+        }
+
+        .team-card {
+            border: 1px solid rgba(148, 163, 184, 0.22);
+            border-radius: 14px;
+            background: rgba(15, 23, 42, 0.4);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 325px;
+        }
+
+        .team-photo {
+            width: 100%;
+            height: 190px;
+            object-fit: cover;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.32), rgba(15, 23, 42, 0.5));
+        }
+
+        .team-body {
+            padding: 0.85rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+        }
+
+        .team-name {
+            color: #f8fafc;
+            font-weight: 800;
+            font-size: 1rem;
+            line-height: 1.3;
+        }
+
+        .team-role {
+            color: #c7d2fe;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .team-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.45;
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 1.5rem 1rem;
+            }
+
+            .hero-title {
+                font-size: 1.55rem;
+            }
+
+            .navbar {
+                padding: 1rem;
+            }
+
+            .navbar-models {
+                flex-direction: column;
+                align-items: flex-end;
+                gap: 0.5rem;
+            }
+
+            .navbar-links {
+                width: 100%;
+                justify-content: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="chem-bg" aria-hidden="true">
+        <canvas id="chemCanvas"></canvas>
+    </div>
+
+    <nav class="navbar">
+        <div class="d-flex justify-content-between align-items-center w-100">
+            <div class="navbar-brand">
+                <span class="icon">🧬</span>
+                <div>
+                    <span class="text">ToxVision</span>
+                    <small>Toxicity Prediction using Graph Neural Networks</small>
+                </div>
+            </div>
+            <div class="navbar-models">
+                <div class="navbar-links">
+                    <a href="/" class="nav-link-pill">Home</a>
+                    <a href="/about" class="nav-link-pill active">About</a>
+                </div>
+                <span class="badge"><i class="fas fa-cube me-2"></i> GINE • GCN • GATv2</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="container">
+            <div class="hero-card">
+                <h1 class="hero-title"><i class="fas fa-circle-info me-2"></i>About This Project</h1>
+                <p class="hero-sub">
+                    This web application predicts molecular toxicity for the Tox21 benchmark using trained graph neural networks.
+                    It combines a Flask inference backend, RDKit chemistry tooling, PyTorch Geometric models, and a modern
+                    interactive interface for single-molecule and batch analysis.
+                </p>
+            </div>
+
+            <div class="row g-4 mb-4">
+                <div class="col-12">
+                    <div class="info-card">
+                        <h2 class="section-title"><i class="fas fa-layer-group"></i>Technology Stack</h2>
+                        <div class="stack-grid">
+                            <div class="stack-item"><i class="fab fa-python"></i>Python</div>
+                            <div class="stack-item"><i class="fas fa-flask"></i>Flask</div>
+                            <div class="stack-item"><i class="fas fa-project-diagram"></i>PyTorch Geometric</div>
+                            <div class="stack-item"><i class="fas fa-brain"></i>PyTorch</div>
+                            <div class="stack-item"><i class="fas fa-atom"></i>RDKit</div>
+                            <div class="stack-item"><i class="fas fa-cube"></i>3Dmol.js</div>
+                            <div class="stack-item"><i class="fab fa-html5"></i>HTML5</div>
+                            <div class="stack-item"><i class="fab fa-css3-alt"></i>CSS3 + Bootstrap</div>
+                            <div class="stack-item"><i class="fas fa-chart-line"></i>NumPy + scikit-learn</div>
+                            <div class="stack-item"><i class="fas fa-table"></i>Pandas</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="info-card">
+                        <h2 class="section-title"><i class="fas fa-globe"></i>Website Capabilities</h2>
+                        <p class="info-text">The website supports practical end-to-end toxicity analysis workflows:</p>
+                        <p class="info-text">1. Single SMILES inference with 2D molecule rendering and interactive 3D structure.</p>
+                        <p class="info-text">2. Batch CSV inference for multiple compounds (requires SMILES column).</p>
+                        <p class="info-text">3. Model selection between GINE, GCN, and GATv2, including all-model comparison mode.</p>
+                        <p class="info-text">4. Endpoint-level toxicity output for all 12 Tox21 assays with probability scores and labels.</p>
+                        <p class="info-text">5. CSV export of latest prediction results from backend.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="info-card">
+                        <h2 class="section-title"><i class="fas fa-database"></i>Dataset And Split Strategy</h2>
+                        <p class="info-text">Training notebook summary (start-to-end):</p>
+                        <p class="info-text">1. Dataset: MoleculeNet Tox21 (~7,831 molecules, 12 toxicity tasks).</p>
+                        <p class="info-text">2. Split: Scaffold-aware 80/10/10 split using Morgan fingerprint key (radius=2, 2048 bits).</p>
+                        <p class="info-text">3. Features: Node features normalized globally; edge features normalized when available.</p>
+                        <p class="info-text">4. Stability controls: feature clamping to [-10, 10], NaN/inf replacement, gradient clipping.</p>
+                        <div>
+                            <span class="metric-chip"><i class="fas fa-flask"></i>Tox21 12 tasks</span>
+                            <span class="metric-chip"><i class="fas fa-code-branch"></i>Scaffold split</span>
+                            <span class="metric-chip"><i class="fas fa-table-cells"></i>Train/Val/Test 80/10/10</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4 mb-4">
+                <div class="col-lg-7">
+                    <div class="info-card">
+                        <h2 class="section-title"><i class="fas fa-bullseye"></i>Where This Project Can Be Used</h2>
+                        <ul class="use-case-list">
+                            <li>Early-stage toxicity screening in drug discovery pipelines before expensive wet-lab assays.</li>
+                            <li>Academic and industry research for structure-toxicity relationship exploration on new compounds.</li>
+                            <li>Educational demonstrations for graph neural networks in cheminformatics and computational toxicology.</li>
+                            <li>Pre-filtering of chemical libraries to prioritize safer candidates for synthesis and testing.</li>
+                            <li>Model comparison studies (GINE vs GCN vs GATv2) under scaffold-aware generalization settings.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="info-card">
+                        <h2 class="section-title"><i class="fas fa-sitemap"></i>System Overview</h2>
+                        <p class="info-text">1. Frontend collects SMILES / CSV and model choice.</p>
+                        <p class="info-text">2. Flask backend converts molecules to graph data.</p>
+                        <p class="info-text">3. Loaded checkpoints generate 12-endpoint toxicity probabilities.</p>
+                        <p class="info-text">4. Results are rendered with 2D/3D molecular visualization and downloadable CSV.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4 mb-4">
+                <div class="col-12">
+                    <div class="info-card">
+                        <h2 class="section-title"><i class="fas fa-brain"></i>Model Architectures And Training</h2>
+                        <div class="data-table-wrap">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Model</th>
+                                        <th>Graph Layers</th>
+                                        <th>Pooling Head</th>
+                                        <th>Dropout</th>
+                                        <th>Optimizer / LR</th>
+                                        <th>Schedulers</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>GINE</td>
+                                        <td>4x GINEConv + BatchNorm</td>
+                                        <td>Mean + Sum pool -> MLP</td>
+                                        <td>0.25</td>
+                                        <td>Adam, 5e-4</td>
+                                        <td>CosineWarmRestarts + ReduceLROnPlateau</td>
+                                    </tr>
+                                    <tr>
+                                        <td>GCN</td>
+                                        <td>4x GCNConv + BatchNorm</td>
+                                        <td>Mean + Sum pool -> MLP</td>
+                                        <td>0.25</td>
+                                        <td>Adam, 5e-4</td>
+                                        <td>CosineWarmRestarts + ReduceLROnPlateau</td>
+                                    </tr>
+                                    <tr>
+                                        <td>GATv2</td>
+                                        <td>4x GATv2Conv (4 heads) + BatchNorm</td>
+                                        <td>Mean + Sum pool -> MLP</td>
+                                        <td>0.30</td>
+                                        <td>Adam, 3e-4</td>
+                                        <td>CosineWarmRestarts + ReduceLROnPlateau</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="footer-note">
+                            Loss setup from notebook: BCEWithLogitsLoss with per-task positive class weights to handle imbalance,
+                            early stopping with patience 8, and up to 50 epochs.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-7">
+                    <div class="info-card">
+                        <h2 class="section-title"><i class="fas fa-chart-line"></i>Reported Notebook Results</h2>
+                        <p class="info-text">From the attached training notebook summary:</p>
+                        <div class="data-table-wrap">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Experiment</th>
+                                        <th>Macro ROC-AUC</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>GCN (scaffold split)</td>
+                                        <td>0.8300</td>
+                                        <td><span class="badge-good">Best in notebook run</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>GINE (scaffold split)</td>
+                                        <td>0.8076</td>
+                                        <td><span class="badge-mid">Strong baseline</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>GATv2 (scaffold split)</td>
+                                        <td>0.7982</td>
+                                        <td><span class="badge-mid">Competitive</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Random split reference</td>
+                                        <td>0.7928</td>
+                                        <td><span class="badge-warn">Notebook comparison value</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="info-card">
+                        <h2 class="section-title"><i class="fas fa-server"></i>Production Inference Stack</h2>
+                        <p class="info-text">Backend endpoint behavior in this website:</p>
+                        <p class="info-text">1. Loads pretrained checkpoints for GINE, GCN, and GATv2 at startup.</p>
+                        <p class="info-text">2. Rebuilds graph features from SMILES with RDKit + PyG Data objects.</p>
+                        <p class="info-text">3. Applies training-aligned normalization and sigmoid-based endpoint probabilities.</p>
+                        <p class="info-text">4. Generates 2D image and 3D SDF for interactive molecular visualization.</p>
+                        <p class="info-text">5. Stores latest prediction rows for backend CSV export.</p>
+                        <div class="footer-note">
+                            The app predicts 12 Tox21 endpoints and reports SAFE/TOXIC labels at threshold 0.5.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4 mt-1">
+                <div class="col-12">
+                    <div class="info-card">
+                        <h2 class="section-title"><i class="fas fa-people-group"></i>Team Members</h2>
+                        <p class="info-text">Add team photos to the folder: static/team/ (filenames shown on each card).</p>
+                        <div class="team-grid">
+                            <div class="team-card">
+                                <img class="team-photo" src="/static/team/saptarshi.png" alt="Saptarshi Ghosh">
+                                <div class="team-body">
+                                    <div class="team-name">Saptarshi Ghosh</div>
+                                    <div class="team-role">Team Lead & Research Coordinator</div>
+                                    <div class="team-desc">Lead project direction, coordinated research milestones, and aligned model experimentation with final deployment goals.</div>
+                                </div>
+                            </div>
+
+                            <div class="team-card">
+                                <img class="team-photo" src="/static/team/sumit.png" alt="Sumit Chaira">
+                                <div class="team-body">
+                                    <div class="team-name">Sumit Chaira</div>
+                                    <div class="team-role">UI/Deployment & Visualization Developer</div>
+                                    <div class="team-desc">Built and refined the web interface, deployment flow, and 2D/3D molecular visualization experience for end users.</div>
+                                </div>
+                            </div>
+
+                            <div class="team-card">
+                                <img class="team-photo" src="/static/team/mangal.png" alt="Mangaldip Dhua">
+                                <div class="team-body">
+                                    <div class="team-name">Mangaldip Dhua</div>
+                                    <div class="team-role">Data Engineer & Preprocessing Specialist</div>
+                                    <div class="team-desc">Handled Tox21 data preparation, scaffold split strategy, normalization steps, and preprocessing robustness checks.</div>
+                                </div>
+                            </div>
+
+                            <div class="team-card">
+                                <img class="team-photo" src="/static/team/uday.png" alt="Uday Shankar Dey">
+                                <div class="team-body">
+                                    <div class="team-name">Uday Shankar Dey</div>
+                                    <div class="team-role">GNN Model Developer</div>
+                                    <div class="team-desc">Developed and trained GINE, GCN, and GATv2 model architectures for multi-task toxicity prediction.</div>
+                                </div>
+                            </div>
+
+                            <div class="team-card">
+                                <img class="team-photo" src="/static/team/arnab.png" alt="Arnab Subhra Ghosh">
+                                <div class="team-body">
+                                    <div class="team-name">Arnab Subhra Ghosh</div>
+                                    <div class="team-role">Model Evaluation & Optimization Engineer</div>
+                                    <div class="team-desc">Evaluated task-wise and macro ROC-AUC metrics, compared split/model performance, and tuned optimization settings.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function initChemistryBackground() {
+            const canvas = document.getElementById('chemCanvas');
+            if (!canvas) return;
+
+            const ctx = canvas.getContext('2d', { alpha: true });
+            if (!ctx) return;
+
+            const atomPalette = [
+                { r: 7, color: 'rgba(241, 245, 249, 0.82)' },
+                { r: 10, color: 'rgba(148, 163, 184, 0.86)' },
+                { r: 11, color: 'rgba(99, 102, 241, 0.82)' },
+                { r: 12, color: 'rgba(239, 68, 68, 0.8)' },
+                { r: 13, color: 'rgba(16, 185, 129, 0.8)' }
+            ];
+
+            const mouse = { x: -9999, y: -9999 };
+            const atoms = [];
+            let w = 0;
+            let h = 0;
+            let rafId = null;
+
+            function resizeCanvas() {
+                w = Math.max(320, Math.floor(window.innerWidth));
+                h = Math.max(320, Math.floor(window.innerHeight));
+                canvas.width = w;
+                canvas.height = h;
+
+                const targetCount = Math.max(28, Math.min(54, Math.floor((w * h) / 23000)));
+                while (atoms.length < targetCount) {
+                    const atom = atomPalette[Math.floor(Math.random() * atomPalette.length)];
+                    atoms.push({
+                        x: Math.random() * w,
+                        y: Math.random() * h,
+                        vx: (Math.random() - 0.5) * 0.4,
+                        vy: (Math.random() - 0.5) * 0.4,
+                        r: atom.r,
+                        color: atom.color
+                    });
+                }
+                atoms.length = targetCount;
+            }
+
+            function drawFrame() {
+                ctx.clearRect(0, 0, w, h);
+
+                for (let i = 0; i < atoms.length; i++) {
+                    for (let j = i + 1; j < atoms.length; j++) {
+                        const dx = atoms[j].x - atoms[i].x;
+                        const dy = atoms[j].y - atoms[i].y;
+                        const dist = Math.hypot(dx, dy);
+                        if (dist < 145) {
+                            const alpha = (1 - dist / 145) * 0.42;
+                            ctx.strokeStyle = `rgba(148, 163, 184, ${alpha})`;
+                            ctx.lineWidth = 1.2;
+                            ctx.beginPath();
+                            ctx.moveTo(atoms[i].x, atoms[i].y);
+                            ctx.lineTo(atoms[j].x, atoms[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+
+                for (const atom of atoms) {
+                    const mdx = atom.x - mouse.x;
+                    const mdy = atom.y - mouse.y;
+                    const md = Math.hypot(mdx, mdy);
+                    if (md < 130) {
+                        const push = (130 - md) / 130;
+                        atom.vx += (mdx / (md || 1)) * push * 0.08;
+                        atom.vy += (mdy / (md || 1)) * push * 0.08;
+                    }
+
+                    atom.vx *= 0.988;
+                    atom.vy *= 0.988;
+                    atom.x += atom.vx;
+                    atom.y += atom.vy;
+
+                    if (atom.x < -20) atom.x = w + 20;
+                    if (atom.x > w + 20) atom.x = -20;
+                    if (atom.y < -20) atom.y = h + 20;
+                    if (atom.y > h + 20) atom.y = -20;
+
+                    ctx.beginPath();
+                    ctx.fillStyle = atom.color;
+                    ctx.arc(atom.x, atom.y, atom.r, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    ctx.beginPath();
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.22)';
+                    ctx.arc(atom.x - atom.r * 0.28, atom.y - atom.r * 0.28, atom.r * 0.4, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                rafId = requestAnimationFrame(drawFrame);
+            }
+
+            resizeCanvas();
+            drawFrame();
+
+            window.addEventListener('mousemove', (e) => {
+                const rect = canvas.getBoundingClientRect();
+                mouse.x = e.clientX - rect.left;
+                mouse.y = e.clientY - rect.top;
+            });
+
+            window.addEventListener('mouseleave', () => {
+                mouse.x = -9999;
+                mouse.y = -9999;
+            });
+
+            window.addEventListener('resize', resizeCanvas);
+            window.addEventListener('beforeunload', () => {
+                if (rafId) cancelAnimationFrame(rafId);
+            });
+        }
+
+        initChemistryBackground();
+    </script>
+</body>
+</html>
