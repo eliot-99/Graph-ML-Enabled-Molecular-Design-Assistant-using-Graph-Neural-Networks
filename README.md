@@ -1,3 +1,13 @@
+---
+title: MolGNN Tox21 Predictor
+emoji: 🧬
+colorFrom: indigo
+colorTo: purple
+sdk: docker
+app_file: app.py
+pinned: false
+---
+
 # 🧬 MolGNN Tox21 Predictor
 
 <div align="center">
