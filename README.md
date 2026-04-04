@@ -400,11 +400,13 @@ This project was developed as part of an academic research initiative on **Graph
 
 ### Contributors
 
-- **Arnab Ghosh** - Lead Developer & ML Engineer
-- **Mangal** - Data Processing & Visualization
-- **Saptarshi** - Model Training & Evaluation
-- **Sumit** - Web Development & UI/UX
-- **Uday** - Documentation & Testing
+| Name | Role |
+|------|------|
+| **Saptarshi Ghosh** | Team Lead & Research Coordinator |
+| **Sumit Chaira** | UI/Deployment & Visualization Developer |
+| **Mangaldip Dhua** | Data Engineer & Preprocessing Specialist |
+| **Uday Shankar Dey** | GNN Model Developer |
+| **Arnab Subhra Ghosh** | Model Evaluation & Optimization Engineer |
 
 ---
 
