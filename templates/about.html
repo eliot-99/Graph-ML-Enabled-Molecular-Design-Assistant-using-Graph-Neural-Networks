@@ -27,12 +27,12 @@
             --text-muted: #94a3b8;
         }
         
-        /* Light theme */
+        /* Light theme - designed to complement dark theme aesthetic */
         html[data-theme="light"] {
-            --dark-bg: #f8fafc;
-            --text-primary: #0f172a;
+            --dark-bg: #ffffff;
+            --text-primary: #1e293b;
             --text-secondary: #475569;
-            --text-muted: #64748b;
+            --text-muted: #78849e;
         }
 
         html, body {
@@ -44,7 +44,7 @@
         }
         
         html[data-theme="light"] body {
-            background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #e8f0ff 100%);
         }
 
         .chem-bg {
@@ -57,6 +57,14 @@
                 radial-gradient(circle at 14% 22%, rgba(99, 102, 241, 0.24), transparent 42%),
                 radial-gradient(circle at 82% 18%, rgba(16, 185, 129, 0.14), transparent 36%),
                 radial-gradient(circle at 50% 82%, rgba(56, 189, 248, 0.12), transparent 40%);
+        }
+        
+        /* Light theme chemistry background - subtle version */
+        html[data-theme="light"] .chem-bg {
+            background:
+                radial-gradient(circle at 14% 22%, rgba(99, 102, 241, 0.06), transparent 42%),
+                radial-gradient(circle at 82% 18%, rgba(16, 185, 129, 0.04), transparent 36%),
+                radial-gradient(circle at 50% 82%, rgba(56, 189, 248, 0.04), transparent 40%);
         }
 
         #chemCanvas {
@@ -78,9 +86,9 @@
         }
         
         html[data-theme="light"] .navbar {
-            background: rgba(255, 255, 255, 0.85);
-            border-bottom: 1px solid rgba(203, 213, 225, 0.3);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            background: rgba(255, 255, 255, 0.75);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.08);
         }
 
         .navbar-brand {
@@ -153,6 +161,25 @@
             border-color: rgba(129, 140, 248, 0.7);
             background: rgba(99, 102, 241, 0.35);
         }
+        
+        /* Light theme nav links */
+        html[data-theme="light"] .nav-link-pill {
+            color: #64748b;
+            border-color: rgba(148, 163, 184, 0.3);
+            background: rgba(148, 163, 184, 0.08);
+        }
+        
+        html[data-theme="light"] .nav-link-pill:hover {
+            color: #1e293b;
+            border-color: rgba(99, 102, 241, 0.4);
+            background: rgba(99, 102, 241, 0.12);
+        }
+        
+        html[data-theme="light"] .nav-link-pill.active {
+            color: #6366f1;
+            border-color: rgba(99, 102, 241, 0.5);
+            background: rgba(99, 102, 241, 0.15);
+        }
 
         .navbar-models .badge {
             background: rgba(99, 102, 241, 0.2);
@@ -162,6 +189,12 @@
             font-size: 0.85rem;
             font-weight: 500;
             border: 1px solid rgba(99, 102, 241, 0.3);
+        }
+        
+        html[data-theme="light"] .navbar-models .badge {
+            background: rgba(99, 102, 241, 0.12);
+            color: #6366f1;
+            border: 1px solid rgba(99, 102, 241, 0.25);
         }
 
         .main-container {
@@ -184,6 +217,15 @@
             padding: 2.2rem;
             margin-bottom: 1.8rem;
         }
+        
+        /* Light theme cards */
+        html[data-theme="light"] .hero-card,
+        html[data-theme="light"] .info-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(99, 102, 241, 0.15);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.08);
+        }
 
         .hero-title {
             font-size: 2rem;
@@ -193,6 +235,11 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+        }
+        
+        html[data-theme="light"] .hero-title {
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            -webkit-text-fill-color: transparent;
         }
 
         .hero-sub {
@@ -363,6 +410,11 @@
             flex-direction: column;
             min-height: 325px;
         }
+        
+        html[data-theme="light"] .team-card {
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(99, 102, 241, 0.15);
+        }
 
         .team-photo {
             width: 100%;
@@ -398,6 +450,18 @@
             font-size: 0.9rem;
             line-height: 1.45;
         }
+        
+        html[data-theme="light"] .team-name {
+            color: #1e293b;
+        }
+        
+        html[data-theme="light"] .team-role {
+            color: #6366f1;
+        }
+        
+        html[data-theme="light"] .team-desc {
+            color: #64748b;
+        }
 
         /* Theme Toggle Button */
         #themeToggle {
@@ -426,15 +490,16 @@
         }
 
         html[data-theme="light"] #themeToggle {
-            background: rgba(241, 245, 249, 0.5);
-            border-color: rgba(203, 213, 225, 0.4);
-            color: var(--text-secondary);
+            background: rgba(99, 102, 241, 0.08);
+            border-color: rgba(99, 102, 241, 0.2);
+            color: #6366f1;
         }
 
         html[data-theme="light"] #themeToggle:hover {
-            background: rgba(203, 213, 225, 0.2);
-            border-color: rgba(99, 102, 241, 0.5);
-            color: var(--primary);
+            background: rgba(99, 102, 241, 0.15);
+            border-color: rgba(99, 102, 241, 0.4);
+            color: #4f46e5;
+            transform: scale(1.05);
         }
 
         @media (max-width: 768px) {

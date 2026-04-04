@@ -34,15 +34,15 @@
             --border-color: #475569;
         }
         
-        /* Light theme */
+        /* Light theme - designed to complement dark theme aesthetic */
         html[data-theme="light"] {
-            --dark-bg: #f8fafc;
-            --dark-surface: #ffffff;
+            --dark-bg: #ffffff;
+            --dark-surface: #f8fafc;
             --dark-card: #f1f5f9;
-            --text-primary: #0f172a;
+            --text-primary: #1e293b;
             --text-secondary: #475569;
-            --text-muted: #64748b;
-            --border-color: #cbd5e1;
+            --text-muted: #78849e;
+            --border-color: #d4dce6;
         }
 
         html, body {
@@ -54,7 +54,15 @@
         }
         
         html[data-theme="light"] body {
-            background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #e8f0ff 100%);
+        }
+        
+        /* Light theme chemistry background - subtle version */
+        html[data-theme="light"] .chem-bg {
+            background:
+                radial-gradient(circle at 14% 22%, rgba(99, 102, 241, 0.06), transparent 42%),
+                radial-gradient(circle at 82% 18%, rgba(16, 185, 129, 0.04), transparent 36%),
+                radial-gradient(circle at 50% 82%, rgba(56, 189, 248, 0.04), transparent 40%);
         }
 
         .navbar {
@@ -67,9 +75,9 @@
         }
         
         html[data-theme="light"] .navbar {
-            background: rgba(255, 255, 255, 0.85);
-            border-bottom: 1px solid rgba(203, 213, 225, 0.3);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            background: rgba(255, 255, 255, 0.75);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.08);
         }
 
         .navbar-brand {
@@ -142,6 +150,25 @@
             border-color: rgba(129, 140, 248, 0.7);
             background: rgba(99, 102, 241, 0.35);
         }
+        
+        /* Light theme nav links */
+        html[data-theme="light"] .nav-link-pill {
+            color: #64748b;
+            border-color: rgba(148, 163, 184, 0.3);
+            background: rgba(148, 163, 184, 0.08);
+        }
+        
+        html[data-theme="light"] .nav-link-pill:hover {
+            color: #1e293b;
+            border-color: rgba(99, 102, 241, 0.4);
+            background: rgba(99, 102, 241, 0.12);
+        }
+        
+        html[data-theme="light"] .nav-link-pill.active {
+            color: #6366f1;
+            border-color: rgba(99, 102, 241, 0.5);
+            background: rgba(99, 102, 241, 0.15);
+        }
 
         .navbar-models .badge {
             background: rgba(99, 102, 241, 0.2);
@@ -151,6 +178,12 @@
             font-size: 0.85rem;
             font-weight: 500;
             border: 1px solid rgba(99, 102, 241, 0.3);
+        }
+        
+        html[data-theme="light"] .navbar-models .badge {
+            background: rgba(99, 102, 241, 0.12);
+            color: #6366f1;
+            border: 1px solid rgba(99, 102, 241, 0.25);
         }
 
         .navbar-status {
@@ -217,6 +250,19 @@
             border-color: rgba(99, 102, 241, 0.3);
             box-shadow: 0 20px 60px rgba(99, 102, 241, 0.1);
         }
+        
+        /* Light theme input card */
+        html[data-theme="light"] .input-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(99, 102, 241, 0.15);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.08);
+        }
+        
+        html[data-theme="light"] .input-card:hover {
+            border-color: rgba(99, 102, 241, 0.25);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.12);
+        }
 
         .section-title {
             font-size: 1.8rem;
@@ -263,6 +309,20 @@
             box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
             outline: none;
         }
+        
+        /* Light theme form inputs */
+        html[data-theme="light"] .form-control,
+        html[data-theme="light"] .form-select {
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+        
+        html[data-theme="light"] .form-control:focus,
+        html[data-theme="light"] .form-select:focus {
+            background: rgba(255, 255, 255, 0.8);
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
 
         .form-select {
             cursor: pointer;
@@ -285,6 +345,16 @@
         .form-select option:hover {
             background: rgba(59, 130, 246, 0.35);
             color: #ffffff;
+        }
+        
+        /* Light theme select dropdown */
+        html[data-theme="light"] .form-select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 10'%3E%3Cpath d='M1 1l7 7 7-7' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+        }
+        
+        html[data-theme="light"] .form-select option {
+            background: #ffffff;
+            color: #1e293b;
         }
 
         .input-help {
@@ -318,6 +388,19 @@
             border-color: rgba(99, 102, 241, 0.5);
             color: var(--text-primary);
         }
+        
+        /* Light theme example buttons */
+        html[data-theme="light"] .example-btn {
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.25);
+            color: #6366f1;
+        }
+        
+        html[data-theme="light"] .example-btn:hover {
+            background: rgba(99, 102, 241, 0.15);
+            border-color: rgba(99, 102, 241, 0.4);
+            color: #4f46e5;
+        }
 
         .custom-file-wrapper {
             position: relative;
@@ -348,6 +431,17 @@
         .custom-file-wrapper:hover .custom-file-label {
             border-color: var(--primary);
             background: rgba(99, 102, 241, 0.1);
+        }
+        
+        /* Light theme file upload */
+        html[data-theme="light"] .custom-file-label {
+            background: rgba(99, 102, 241, 0.05);
+            border: 2px dashed rgba(99, 102, 241, 0.2);
+        }
+        
+        html[data-theme="light"] .custom-file-wrapper:hover .custom-file-label {
+            border-color: #6366f1;
+            background: rgba(99, 102, 241, 0.08);
         }
 
         .file-text {
@@ -430,6 +524,20 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(99, 102, 241, 0.2);
         }
+        
+        /* Light theme secondary button */
+        html[data-theme="light"] .btn-secondary-action {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(59, 130, 246, 0.08));
+            border: 1.5px solid rgba(99, 102, 241, 0.25);
+            color: #6366f1;
+            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.08);
+        }
+        
+        html[data-theme="light"] .btn-secondary-action:hover {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(59, 130, 246, 0.12));
+            border-color: rgba(99, 102, 241, 0.4);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
+        }
 
         .results-header {
             display: flex;
@@ -454,6 +562,22 @@
         .results-title i {
             color: #ffffff;
         }
+        
+        /* Light theme results header */
+        html[data-theme="light"] .results-header {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(99, 102, 241, 0.08));
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            box-shadow: 0 4px 16px rgba(99, 102, 241, 0.08);
+        }
+        
+        html[data-theme="light"] .results-title {
+            color: #6366f1;
+            -webkit-text-fill-color: #6366f1;
+        }
+        
+        html[data-theme="light"] .results-title i {
+            color: #6366f1;
+        }
 
         .results-actions {
             display: flex;
@@ -473,6 +597,20 @@
         .molecule-card:hover {
             border-color: rgba(99, 102, 241, 0.6);
             box-shadow: 0 30px 60px rgba(99, 102, 241, 0.25);
+            transform: translateY(-4px);
+        }
+        
+        /* Light theme molecule cards */
+        html[data-theme="light"] .molecule-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(248, 250, 252, 0.6));
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(99, 102, 241, 0.2);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.1);
+        }
+        
+        html[data-theme="light"] .molecule-card:hover {
+            border-color: rgba(99, 102, 241, 0.4);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.15);
             transform: translateY(-4px);
         }
 
@@ -830,15 +968,16 @@
         }
 
         html[data-theme="light"] #themeToggle {
-            background: rgba(241, 245, 249, 0.5);
-            border-color: rgba(203, 213, 225, 0.4);
-            color: var(--text-secondary);
+            background: rgba(99, 102, 241, 0.08);
+            border-color: rgba(99, 102, 241, 0.2);
+            color: #6366f1;
         }
 
         html[data-theme="light"] #themeToggle:hover {
-            background: rgba(203, 213, 225, 0.2);
-            border-color: rgba(99, 102, 241, 0.5);
-            color: var(--primary);
+            background: rgba(99, 102, 241, 0.15);
+            border-color: rgba(99, 102, 241, 0.4);
+            color: #4f46e5;
+            transform: scale(1.05);
         }
 
         @media (max-width: 768px) {
