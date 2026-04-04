@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6366f1;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <!-- Background circle -->
+  <circle cx="50" cy="50" r="48" fill="#0f172a" stroke="url(#grad1)" stroke-width="3"/>
+  <!-- DNA helix / molecular structure -->
+  <g fill="none" stroke="url(#grad1)" stroke-width="3" stroke-linecap="round">
+    <!-- Left strand -->
+    <path d="M30 20 Q40 35 30 50 Q20 65 30 80"/>
+    <!-- Right strand -->
+    <path d="M70 20 Q60 35 70 50 Q80 65 70 80"/>
+    <!-- Connecting bonds -->
+    <line x1="33" y1="28" x2="67" y2="28"/>
+    <line x1="27" y1="42" x2="73" y2="42"/>
+    <line x1="30" y1="58" x2="70" y2="58"/>
+    <line x1="27" y1="72" x2="73" y2="72"/>
+  </g>
+  <!-- Atom nodes -->
+  <circle cx="30" cy="20" r="6" fill="url(#grad2)"/>
+  <circle cx="70" cy="20" r="6" fill="url(#grad1)"/>
+  <circle cx="30" cy="50" r="6" fill="url(#grad1)"/>
+  <circle cx="70" cy="50" r="6" fill="url(#grad2)"/>
+  <circle cx="30" cy="80" r="6" fill="url(#grad2)"/>
+  <circle cx="70" cy="80" r="6" fill="url(#grad1)"/>
+  <!-- Center node (GNN) -->
+  <circle cx="50" cy="50" r="10" fill="url(#grad1)" opacity="0.9"/>
+  <text x="50" y="54" text-anchor="middle" fill="white" font-size="8" font-weight="bold">GNN</text>
+</svg>

@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tox21 ML Predictor</title>
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
     <script src="https://3dmol.org/build/3Dmol-min.js"></script>
@@ -22,6 +23,8 @@
             --success: #10b981;
             --danger: #ef4444;
             --warning: #f59e0b;
+            
+            /* Dark theme (default) */
             --dark-bg: #0f172a;
             --dark-surface: #1e293b;
             --dark-card: #334155;
@@ -30,12 +33,28 @@
             --text-muted: #94a3b8;
             --border-color: #475569;
         }
+        
+        /* Light theme */
+        html[data-theme="light"] {
+            --dark-bg: #f8fafc;
+            --dark-surface: #ffffff;
+            --dark-card: #f1f5f9;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+            --border-color: #cbd5e1;
+        }
 
         html, body {
             background: linear-gradient(135deg, var(--dark-bg) 0%, #1a1f3a 100%);
             color: var(--text-primary);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             min-height: 100vh;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        
+        html[data-theme="light"] body {
+            background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%);
         }
 
         .navbar {
@@ -44,6 +63,13 @@
             border-bottom: 1px solid rgba(148, 163, 184, 0.1);
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
             padding: 1.2rem 2rem;
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+        
+        html[data-theme="light"] .navbar {
+            background: rgba(255, 255, 255, 0.85);
+            border-bottom: 1px solid rgba(203, 213, 225, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
         }
 
         .navbar-brand {
@@ -777,6 +803,44 @@
             font-size: 0.9rem;
         }
 
+        /* Theme Toggle Button */
+        #themeToggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            border-radius: 999px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            border: 1px solid rgba(148, 163, 184, 0.25);
+            background: rgba(15, 23, 42, 0.45);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            margin-left: 1rem;
+        }
+
+        #themeToggle:hover {
+            color: #ffffff;
+            border-color: rgba(129, 140, 248, 0.55);
+            background: rgba(99, 102, 241, 0.25);
+            transform: scale(1.05);
+        }
+
+        html[data-theme="light"] #themeToggle {
+            background: rgba(241, 245, 249, 0.5);
+            border-color: rgba(203, 213, 225, 0.4);
+            color: var(--text-secondary);
+        }
+
+        html[data-theme="light"] #themeToggle:hover {
+            background: rgba(203, 213, 225, 0.2);
+            border-color: rgba(99, 102, 241, 0.5);
+            color: var(--primary);
+        }
+
         @media (max-width: 768px) {
             .main-container {
                 padding: 1.5rem 1rem;
@@ -793,10 +857,22 @@
             .navbar-brand {
                 gap: 0.5rem;
             }
+            .navbar-brand .icon {
+                font-size: 1.5rem;
+            }
+            .navbar-brand .text {
+                font-size: 1.1rem;
+            }
             .navbar-models {
                 flex-direction: column;
                 gap: 0.5rem;
                 font-size: 0.8rem;
+            }
+            #themeToggle {
+                margin-left: 0.5rem;
+                width: 36px;
+                height: 36px;
+                font-size: 0.9rem;
             }
             .results-header {
                 flex-direction: column;
@@ -808,6 +884,61 @@
             }
             .btn-secondary-action {
                 flex: 1;
+            }
+            .form-label {
+                font-size: 0.95rem;
+            }
+            .form-control, .form-select {
+                font-size: 1rem;
+            }
+            h1, h2, h3 {
+                font-size: 1.3rem !important;
+            }
+        }
+
+        /* Tablet optimization (576px - 992px) */
+        @media (min-width: 576px) and (max-width: 991px) {
+            .main-container {
+                padding: 2rem 1.5rem;
+            }
+            .input-card {
+                padding: 2rem;
+            }
+            .navbar {
+                padding: 1.1rem 1.5rem;
+            }
+            .navbar-models {
+                gap: 1rem;
+            }
+            .section-title {
+                font-size: 1.6rem;
+            }
+        }
+
+        /* Small mobile devices (< 360px) */
+        @media (max-width: 360px) {
+            .navbar-brand .text {
+                font-size: 0.95rem;
+            }
+            .navbar-brand small {
+                font-size: 0.55rem;
+            }
+            .navbar-models {
+                font-size: 0.7rem;
+            }
+            .input-card {
+                padding: 1.2rem;
+            }
+            .form-group-wrapper {
+                margin-bottom: 1.2rem;
+            }
+            .section-title {
+                font-size: 1.2rem;
+            }
+            #themeToggle {
+                width: 32px;
+                height: 32px;
+                font-size: 0.8rem;
             }
         }
     </style>
@@ -835,6 +966,9 @@
             </div>
             <span class="badge"><i class="fas fa-cube me-2"></i> GINE • GCN • GATv2</span>
             <span class="navbar-status"><i class="fas fa-circle-check me-1"></i> Ready</span>
+            <button id="themeToggle" title="Toggle dark/light mode" aria-label="Toggle dark/light mode">
+                <i class="fas fa-moon"></i>
+            </button>
         </div>
     </div>
 </nav>
@@ -1273,6 +1407,50 @@ window.addEventListener('resize', () => {
         scheduleViewerFit();
     }, 120);
 });
+
+// Initialize theme on page load
+function initializeTheme() {
+    const storedTheme = localStorage.getItem('theme') || 'dark';
+    const htmlElement = document.documentElement;
+    
+    // Set initial theme
+    htmlElement.setAttribute('data-theme', storedTheme);
+    updateThemeIcon(storedTheme);
+}
+
+// Update theme icon based on current theme
+function updateThemeIcon(theme) {
+    const toggleBtn = document.getElementById('themeToggle');
+    if (toggleBtn) {
+        const icon = toggleBtn.querySelector('i');
+        if (theme === 'dark') {
+            icon.className = 'fas fa-sun';
+            toggleBtn.title = 'Switch to light mode';
+        } else {
+            icon.className = 'fas fa-moon';
+            toggleBtn.title = 'Switch to dark mode';
+        }
+    }
+}
+
+// Theme toggle button functionality
+document.getElementById('themeToggle').addEventListener('click', () => {
+    const htmlElement = document.documentElement;
+    const currentTheme = htmlElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    // Update attribute
+    htmlElement.setAttribute('data-theme', newTheme);
+    
+    // Save preference to localStorage
+    localStorage.setItem('theme', newTheme);
+    
+    // Update icon
+    updateThemeIcon(newTheme);
+});
+
+// Initialize theme when page loads
+initializeTheme();
 
 initChemistryBackground();
 </script>
