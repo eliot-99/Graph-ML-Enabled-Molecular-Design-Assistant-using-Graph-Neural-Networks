@@ -26,5 +26,8 @@ COPY --chown=user . /app
 # Expose port 7860 (Hugging Face default)
 EXPOSE 7860
 
+# Force unbuffered output for logs
+ENV PYTHONUNBUFFERED=1
+
 # Run the Flask app
 CMD ["python", "app.py"]

@@ -1,5 +1,15 @@
 import os
 import sys
+
+# Force unbuffered output immediately
+sys.stdout.reconfigure(line_buffering=True) if hasattr(sys.stdout, 'reconfigure') else None
+sys.stderr.reconfigure(line_buffering=True) if hasattr(sys.stderr, 'reconfigure') else None
+
+print("=" * 60, flush=True)
+print("MolGNN Tox21 Predictor - Starting...", flush=True)
+print(f"Python version: {sys.version}", flush=True)
+print("=" * 60, flush=True)
+
 from datetime import datetime
 
 # Patch for Windows RDKit DLL issue
@@ -9,18 +19,26 @@ class FakeInchi:
 
 sys.modules['rdkit.Chem.inchi'] = FakeInchi()
 
+print("Importing libraries...", flush=True)
 import base64
 import io
 from flask import Flask, render_template, request, jsonify, Response
+print("  - Flask imported", flush=True)
 import torch
+print(f"  - PyTorch {torch.__version__} imported", flush=True)
 import torch.nn.functional as F
 from torch_geometric.data import Data
+print("  - PyTorch Geometric imported", flush=True)
 from rdkit import Chem
 from rdkit.Chem import Draw, AllChem
+print("  - RDKit imported", flush=True)
 import pandas as pd
 import numpy as np
+print("All libraries loaded successfully!", flush=True)
+
 app = Flask(__name__)
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+print(f"Using device: {device}", flush=True)
 
 TASK_NAMES = [
     "NR-AR", "NR-AR-LBD", "NR-AhR", "NR-Aromatase",
@@ -385,5 +403,17 @@ def export_csv():
 if __name__ == "__main__":
     # Use port 7860 for Hugging Face Spaces, fallback to 5000 for local
     import os
+    import sys
+    
+    # Force stdout to be unbuffered for HuggingFace logs
+    sys.stdout.reconfigure(line_buffering=True)
+    sys.stderr.reconfigure(line_buffering=True)
+    
+    print("=" * 50, flush=True)
+    print("Starting MolGNN Tox21 Predictor...", flush=True)
+    print(f"Python version: {sys.version}", flush=True)
+    print("=" * 50, flush=True)
+    
     port = int(os.environ.get("PORT", 7860))
-    app.run(debug=False, host="0.0.0.0", port=port)
+    print(f"Starting Flask server on 0.0.0.0:{port}", flush=True)
+    app.run(debug=False, host="0.0.0.0", port=port, threaded=True)
