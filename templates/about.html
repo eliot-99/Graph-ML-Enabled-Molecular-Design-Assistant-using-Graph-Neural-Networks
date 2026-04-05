@@ -238,8 +238,14 @@
         }
         
         html[data-theme="light"] .hero-title {
-            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            background: linear-gradient(135deg, #4f46e5, #6366f1);
+            -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        html[data-theme="light"] .hero-title i {
+            -webkit-text-fill-color: #6366f1;
         }
 
         .hero-sub {
@@ -490,6 +496,38 @@
             height: 190px;
             object-fit: cover;
             background: linear-gradient(135deg, rgba(99, 102, 241, 0.32), rgba(15, 23, 42, 0.5));
+        }
+        
+        /* Fallback for images that don't load */
+        .team-photo::before {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.4), rgba(15, 23, 42, 0.6));
+        }
+        
+        /* Hide broken image icon */
+        .team-photo:not([src]), 
+        .team-photo[src=""],
+        .team-photo:-moz-broken {
+            position: relative;
+        }
+        
+        .team-photo-placeholder {
+            width: 100%;
+            height: 190px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.35), rgba(59, 130, 246, 0.25));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        html[data-theme="light"] .team-photo-placeholder {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(59, 130, 246, 0.1));
+            color: rgba(99, 102, 241, 0.5);
         }
 
         .team-body {
@@ -881,10 +919,10 @@
                 <div class="col-12">
                     <div class="info-card">
                         <h2 class="section-title"><i class="fas fa-people-group"></i>Team Members</h2>
-                        <p class="info-text">Add team photos to the folder: static/team/ (filenames shown on each card).</p>
+                        <p class="info-text">Team members who contributed to this project.</p>
                         <div class="team-grid">
                             <div class="team-card">
-                                <img class="team-photo" src="https://drive.google.com/uc?export=view&id=1Rp8eKsLqvN3AJ4y_52epKEAbU8yKXhht" alt="Saptarshi Ghosh">
+                                <div class="team-photo-placeholder"><i class="fas fa-user"></i></div>
                                 <div class="team-body">
                                     <div class="team-name">Saptarshi Ghosh</div>
                                     <div class="team-role">Team Lead & Research Coordinator</div>
@@ -893,7 +931,7 @@
                             </div>
 
                             <div class="team-card">
-                                <img class="team-photo" src="https://drive.google.com/uc?export=view&id=1jZlfSUCH8p2CV3ckjt3qVNbbLs5tFw4F" alt="Sumit Chaira">
+                                <div class="team-photo-placeholder"><i class="fas fa-user"></i></div>
                                 <div class="team-body">
                                     <div class="team-name">Sumit Chaira</div>
                                     <div class="team-role">UI/Deployment & Visualization Developer</div>
@@ -902,7 +940,7 @@
                             </div>
 
                             <div class="team-card">
-                                <img class="team-photo" src="https://drive.google.com/uc?export=view&id=1CM8c2F09Je8HZ_Cyk5BsyOxp6vg7ZhWA" alt="Mangaldip Dhua">
+                                <div class="team-photo-placeholder"><i class="fas fa-user"></i></div>
                                 <div class="team-body">
                                     <div class="team-name">Mangaldip Dhua</div>
                                     <div class="team-role">Data Engineer & Preprocessing Specialist</div>
@@ -911,7 +949,7 @@
                             </div>
 
                             <div class="team-card">
-                                <img class="team-photo" src="https://drive.google.com/uc?export=view&id=1_bROW_VquM1C6d27uOBHd7-0VZI5ivl8" alt="Uday Shankar Dey">
+                                <div class="team-photo-placeholder"><i class="fas fa-user"></i></div>
                                 <div class="team-body">
                                     <div class="team-name">Uday Shankar Dey</div>
                                     <div class="team-role">GNN Model Developer</div>
@@ -920,7 +958,7 @@
                             </div>
 
                             <div class="team-card">
-                                <img class="team-photo" src="https://drive.google.com/uc?export=view&id=1l5YV0yiWK_KMAgd37xsU6-6_blFXv05D" alt="Arnab Subhra Ghosh">
+                                <div class="team-photo-placeholder"><i class="fas fa-user"></i></div>
                                 <div class="team-body">
                                     <div class="team-name">Arnab Subhra Ghosh</div>
                                     <div class="team-role">Model Evaluation & Optimization Engineer</div>
