@@ -332,7 +332,7 @@ def predict():
                 for key, (mdl, name) in MODEL_MAP.items():
                     probs = run_prediction(mdl, data.clone())
                     results.append({"smiles": smiles_str, "model": name, "probs": probs})
-                response = {"type": "batch", "results": results}
+                response = {"type": "batch", "smiles": smiles_str, "results": results}
             else:
                 if model_choice not in MODEL_MAP:
                     return jsonify({"error": "Unknown model"}), 400
@@ -341,6 +341,7 @@ def predict():
                 results = [{"smiles": smiles_str, "model": name, "probs": probs}]
                 response = {
                     "type": "single",
+                    "smiles": smiles_str,
                     "image": img_b64,
                     "sdf": sdf_block,
                     "probs": probs,
