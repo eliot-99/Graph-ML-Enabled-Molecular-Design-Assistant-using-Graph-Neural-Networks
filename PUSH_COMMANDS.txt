@@ -1,0 +1,11 @@
+COMMAND 1:
+git cherry-pick --continue
+
+COMMAND 2:
+git push -f origin hf-clean
+
+COMMAND 3:
+git push -f hf hf-clean:main
+
+COMMAND 4:
+git status

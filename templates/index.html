@@ -274,6 +274,12 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
+        
+        /* Light theme section title */
+        html[data-theme="light"] .section-title {
+            background: linear-gradient(135deg, #1e293b, #6366f1);
+            -webkit-text-fill-color: transparent;
+        }
 
         .form-group-wrapper {
             margin-bottom: 2rem;
@@ -651,6 +657,12 @@
             position: relative;
             z-index: 5;
         }
+        
+        /* Light theme card labels */
+        html[data-theme="light"] .card-label {
+            color: #1e293b;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
 
         .viewer-container {
             width: 100%;
@@ -698,6 +710,157 @@
             margin-bottom: 1.5rem;
         }
 
+        .molecule-info-card {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(51, 65, 85, 0.6));
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 50px rgba(16, 185, 129, 0.1);
+            transition: all 0.4s ease;
+            margin-bottom: 2rem;
+        }
+
+        .molecule-info-card:hover {
+            border-color: rgba(16, 185, 129, 0.6);
+            box-shadow: 0 30px 60px rgba(16, 185, 129, 0.2);
+        }
+
+        .molecule-info-card .card-label {
+            margin-bottom: 1.5rem;
+            color: #10b981;
+        }
+
+        html[data-theme="light"] .molecule-info-card {
+            border: 2px solid rgba(16, 185, 129, 0.25);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(248, 250, 252, 0.6));
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.08);
+        }
+
+        html[data-theme="light"] .molecule-info-card:hover {
+            border-color: rgba(16, 185, 129, 0.4);
+            box-shadow: 0 15px 40px rgba(16, 185, 129, 0.15);
+        }
+
+        html[data-theme="light"] .molecule-info-card .card-label {
+            color: #059669;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .info-item {
+            padding: 1.2rem;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .info-item:hover {
+            background: rgba(99, 102, 241, 0.15);
+            border-color: rgba(99, 102, 241, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .info-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.6rem;
+        }
+
+        .info-value {
+            display: block;
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: var(--primary-light);
+            word-break: break-all;
+        }
+
+        .toxicity-summary {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid rgba(99, 102, 241, 0.2);
+        }
+
+        .summary-item {
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .summary-item.safe {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .summary-item.toxic {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .summary-item-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.4rem;
+        }
+
+        .summary-item-value {
+            font-size: 1.8rem;
+            font-weight: 900;
+        }
+
+        .summary-item.safe .summary-item-value {
+            color: #10b981;
+        }
+
+        .summary-item.toxic .summary-item-value {
+            color: #ef4444;
+        }
+
+        html[data-theme="light"] .info-item {
+            background: rgba(99, 102, 241, 0.08);
+            border: 1px solid rgba(99, 102, 241, 0.15);
+        }
+
+        html[data-theme="light"] .info-item:hover {
+            background: rgba(99, 102, 241, 0.12);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        html[data-theme="light"] .info-label {
+            color: #64748b;
+        }
+
+        html[data-theme="light"] .info-value {
+            color: #6366f1;
+        }
+
+        html[data-theme="light"] .summary-item.safe {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        html[data-theme="light"] .summary-item.toxic {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
         .table-responsive {
             border-radius: 12px;
             overflow: hidden;
@@ -726,6 +889,12 @@
             white-space: nowrap;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
             background: transparent;
+        }
+        
+        /* Light theme table headers */
+        html[data-theme="light"] .table th {
+            color: #1e293b;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
         }
 
         .col-endpoint {
@@ -789,6 +958,11 @@
             display: block;
             padding: 0.3rem 0;
             letter-spacing: 0.3px;
+        }
+        
+        /* Light theme endpoint names */
+        html[data-theme="light"] .endpoint-name {
+            color: #1e293b;
         }
 
         .progress {
@@ -1448,6 +1622,14 @@
 
                 <!-- Right Column: Predictions -->
                 <div class="col-lg-7">
+                    <!-- Molecule Info Card -->
+                    <div class="molecule-info-card" id="moleculeInfoCard" style="display:none;">
+                        <span class="card-label"><i class="fas fa-flask me-2"></i>Molecular Properties & Toxicity Summary</span>
+                        <div class="info-grid" id="infoGrid"></div>
+                        <div class="toxicity-summary" id="toxicitySummary"></div>
+                    </div>
+
+                    <!-- Predictions Table -->
                     <div class="predictions-card">
                         <span class="card-label">Tox21 Toxicity Endpoints (12 Assays)</span>
                         <div class="table-responsive">
@@ -1485,6 +1667,25 @@ const TASK_NAMES = [
     "NR-ER", "NR-ER-LBD", "NR-PPAR-gamma",
     "SR-ARE", "SR-ATAD5", "SR-HSE", "SR-MMP", "SR-p53"
 ];
+
+const ENDPOINT_DISPLAY_NAMES = {
+    "NR-AR": "Androgen Receptor",
+    "NR-AR-LBD": "Androgen Receptor (Ligand Binding)",
+    "NR-AhR": "Aryl hydrocarbon Receptor",
+    "NR-Aromatase": "Aromatase",
+    "NR-ER": "Estrogen Receptor",
+    "NR-ER-LBD": "Estrogen Receptor (Ligand Binding)",
+    "NR-PPAR-gamma": "PPAR Gamma Receptor",
+    "SR-ARE": "Antioxidant Response Element",
+    "SR-ATAD5": "ATAD5 Stress Response",
+    "SR-HSE": "Heat Shock Element",
+    "SR-MMP": "Matrix Metalloproteinase",
+    "SR-p53": "p53 Tumor Suppressor"
+};
+
+function getDisplayName(taskName) {
+    return ENDPOINT_DISPLAY_NAMES[taskName] || taskName;
+}
 
 let viewer = null;
 let viewerResizeTimer = null;
@@ -1630,6 +1831,63 @@ function setSmiles(smiles) {
     document.getElementById("smilesInput").value = smiles;
 }
 
+function displayMoleculeInfo(smiles, probs) {
+    const infoCard = document.getElementById("moleculeInfoCard");
+    if (!smiles || !probs) {
+        infoCard.style.display = "none";
+        return;
+    }
+
+    // Calculate basic molecular properties from SMILES
+    const atomCount = (smiles.match(/[A-Z][a-z]?/g) || []).length;
+    const hasRing = /[0-9()]/.test(smiles);
+    const hasBranch = /\(/.test(smiles);
+    
+    // Count toxicity predictions
+    const toxicCount = probs.filter(p => p > 0.5).length;
+    const safeCount = probs.filter(p => p <= 0.5).length;
+    
+    // Calculate average probability
+    const avgProb = (probs.reduce((a, b) => a + b, 0) / probs.length).toFixed(4);
+    const maxProb = Math.max(...probs).toFixed(4);
+    
+    // Create info grid HTML
+    const infoGridHTML = `
+        <div class="info-item">
+            <span class="info-label">SMILES</span>
+            <span class="info-value" style="font-size: 0.9rem; word-break: break-word;">${smiles.substring(0, 20)}${smiles.length > 20 ? '...' : ''}</span>
+        </div>
+        <div class="info-item">
+            <span class="info-label">Atom Count</span>
+            <span class="info-value">${atomCount}</span>
+        </div>
+        <div class="info-item">
+            <span class="info-label">Avg Toxicity</span>
+            <span class="info-value">${avgProb}</span>
+        </div>
+        <div class="info-item">
+            <span class="info-label">Max Toxicity</span>
+            <span class="info-value">${maxProb}</span>
+        </div>
+    `;
+    
+    // Create toxicity summary HTML
+    const toxicitySummaryHTML = `
+        <div class="summary-item safe">
+            <span class="summary-item-label">Safe Endpoints</span>
+            <span class="summary-item-value">${safeCount}</span>
+        </div>
+        <div class="summary-item toxic">
+            <span class="summary-item-label">Toxic Endpoints</span>
+            <span class="summary-item-value">${toxicCount}</span>
+        </div>
+    `;
+    
+    document.getElementById("infoGrid").innerHTML = infoGridHTML;
+    document.getElementById("toxicitySummary").innerHTML = toxicitySummaryHTML;
+    infoCard.style.display = "block";
+}
+
 async function startPrediction() {
     const smiles = document.getElementById("smilesInput").value.trim();
     const file = document.getElementById("csvUpload").files[0];
@@ -1686,12 +1944,15 @@ async function startPrediction() {
                 
                 html += `
                     <tr class="${rowClass}">
-                        <td><span class="endpoint-name">${TASK_NAMES[i]}</span></td>
+                        <td><span class="endpoint-name">${getDisplayName(TASK_NAMES[i])}</span></td>
                         <td style="text-align: center; font-size: 1.1rem; color: var(--text-primary);">${originalValue}</td>
                         <td style="text-align: center;"><span class="${badgeClass}">${badgeText}</span></td>
                     </tr>`;
             });
             document.getElementById("resultsTable").innerHTML = html;
+            
+            // Display molecule info
+            displayMoleculeInfo(data.smiles, data.probs);
         } else {
             // Batch Results
             let html = "";
@@ -1706,13 +1967,18 @@ async function startPrediction() {
                     
                     html += `
                         <tr class="${rowClass}">
-                            <td><span class="endpoint-name">${TASK_NAMES[i]}</span></td>
+                            <td><span class="endpoint-name">${getDisplayName(TASK_NAMES[i])}</span></td>
                             <td style="text-align: center; font-size: 1.1rem; color: var(--text-primary);">${originalValue}</td>
                             <td style="text-align: center;"><span class="${badgeClass}">${badgeText}</span></td>
                         </tr>`;
                 });
             });
             document.getElementById("resultsTable").innerHTML = html;
+            
+            // For batch, show info for first molecule
+            if (data.results.length > 0) {
+                displayMoleculeInfo(data.results[0].smiles, data.results[0].probs);
+            }
         }
 
     } catch (err) {
